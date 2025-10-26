@@ -108,6 +108,7 @@ const StyledCard = styled.div`
     z-index: 2;
 
     @media (max-width: 768px) {
+      padding-top: 25px;
     }
 
     display: flex;
@@ -150,7 +151,9 @@ const StyledCard = styled.div`
       justify-content: center;
       align-items: center;
       gap: 2px;
-
+      @media (max-width: 768px) {
+        transform: translate(-10px, 0px);
+      }
       .ItemIcon {
         height: 70%;
         width: auto;

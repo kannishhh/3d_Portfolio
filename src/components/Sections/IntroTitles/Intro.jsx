@@ -41,7 +41,6 @@ const SkillsTitles = forwardRef((props, scrollContainerRef) => {
         </div>
         <div className="marqueeItem">
           <p>AI & Web Enthusiast</p>
-          <div className="marqueeDot"></div>
         </div>
       </div>
     </StyledSkillsTitles>

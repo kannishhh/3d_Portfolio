@@ -2,6 +2,7 @@ import React from "react";
 import { StyledProjects } from "./StyledProjects";
 import WorkCard from "./WorkCard";
 import Data from "./WorksData";
+import { useResponsive } from "../../../utils/IsMobile";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -12,6 +13,48 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const Projects = React.forwardRef((props, ref) => {
+  const { isMobile, isTablet } = useResponsive();
+
+  const getSwiperSettings = () => {
+    if (isMobile) {
+      return {
+        speed: 3500,
+        autoplay: {
+          delay: 0,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: false,
+          reverseDirection: false,
+        },
+        allowTouchMove: false,
+        simulateTouch: false,
+      };
+    } else if (isTablet) {
+      return {
+        speed: 3500,
+        autoplay: {
+          delay: 0,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: false,
+          reverseDirection: false,
+        },
+        allowTouchMove: false,
+        simulateTouch: false,
+      };
+    } else {
+      return {
+        speed: 4000,
+        autoplay: {
+          delay: 1,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: false,
+        },
+        allowTouchMove: false,
+        simulateTouch: false,
+      };
+    }
+  };
+
+  const swiperSettings = getSwiperSettings();
   return (
     <StyledProjects ref={ref}>
       <div className="ProjectsContainer">
@@ -68,15 +111,14 @@ const Projects = React.forwardRef((props, ref) => {
             className={"SwiperContainer"}
             loop={true}
             slidesPerView={"auto"}
-            autoplay={{
-              delay: 1,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: false,
-            }}
-            speed={4000}
-            allowTouchMove={false}
-            simulateTouch={false}
-            navigation={true}
+            autoplay={swiperSettings.autoplay}
+            speed={swiperSettings.speed}
+            allowTouchMove={swiperSettings.allowTouchMove}
+            simulateTouch={swiperSettings.simulateTouch}
+            navigation={!isMobile}
+            pagination={false}
+            freeMode={true}
+            spaceBetween={isMobile ? 10 : 5}
           >
             {Data.map((Item, index) => (
               <SwiperSlide className="SwiperEl" key={index}>
