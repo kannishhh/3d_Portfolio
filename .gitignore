@@ -89,3 +89,5 @@ Desktop.ini
 
 # Netlify
 .netlify
+
+.vercel

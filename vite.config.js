@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     // Optimize for production
-    minify: 'terser',
+    minify: 'esbuild', // Use esbuild (default, faster than terser)
     rollupOptions: {
       output: {
         manualChunks: {
