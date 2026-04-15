@@ -87,7 +87,6 @@ Desktop.ini
 # Vercel
 .vercel
 
-# Netlify
-.netlify
+public/
 
-.vercel
+.venv
