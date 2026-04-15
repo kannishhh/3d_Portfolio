@@ -65,11 +65,11 @@ A high-end, interactive portfolio website built with React, Three.js, and Tailwi
 ├── src/
 │   ├── components/       # Reusable UI components
 │   │   ├── About.jsx     # Three.js Canvas and 3D logic
-│   │   ├── Contact.jsx      # Landing section
-│   │   ├── Hero.jsx      # Landing section
-│   │   ├── Journey.jsx      # Landing section
-│   │   ├── Projects.jsx      # Landing section
-│   │   ├── Scene.jsx      # Landing section
+│   │   ├── Contact.jsx
+│   │   ├── Hero.jsx
+│   │   ├── Journey.jsx
+│   │   ├── Projects.jsx
+│   │   ├── Scene.jsx
 │   │   └── Skills.jsx
 │   ├── data/             # Static data for projects, skills, etc.
 │   ├── App.jsx           # Main application logic & Routing
