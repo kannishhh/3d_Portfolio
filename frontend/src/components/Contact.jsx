@@ -1,0 +1,206 @@
+import { useState } from "react";
+import { motion } from "motion/react";
+import { Mail, ArrowRight, Send, CheckCircle2 } from "lucide-react";
+import { info } from "../data/info";
+import { Link } from "react-router-dom";
+import emailjs from "@emailjs/browser";
+
+export default function Contact() {
+  const [formState, setFormState] = useState("idle");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormState("submitting");
+
+    try {
+      const result = await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      );
+
+      if (result.status === 200) {
+        setFormState("success");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setFormState("error");
+      }
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setFormState("error");
+    }
+  };
+
+  return (
+    <section className="min-h-screen flex flex-col justify-center px-8 md:px-32 relative">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <h2 className="text-white/40 font-sans text-xs uppercase tracking-[0.4em] mb-8 block font-medium">
+            Contact Me
+          </h2>
+          <h3 className="text-6xl md:text-[8rem] font-light mb-12 leading-[0.85] tracking-tighter">
+            Get in <br />
+            <span className="italic text-gradient-emerald">Touch</span>
+          </h3>
+
+          <div className="space-y-8">
+            <a
+              href="mailto:knshkainth2002@gmail.com"
+              className="flex items-center gap-4 text-white group w-fit"
+            >
+              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-jewel-emerald group-hover:text-black transition-all duration-500">
+                <Mail className="w-5 h-5" />
+              </div>
+              <span className="font-serif italic text-2xl group-hover:text-jewel-emerald transition-colors">
+                knshkainth2002@gmail.com
+              </span>
+            </a>
+
+            <div className="flex gap-8">
+              <a
+                href={info.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group cursor-pointer flex items-center gap-2"
+              >
+                <span className="text-xl font-serif italic text-zinc-400 group-hover:text-jewel-emerald transition-colors">
+                  LinkedIn
+                </span>
+                <ArrowRight className="w-4 h-4 text-zinc-600 group-hover:text-jewel-emerald group-hover:translate-x-1 transition-all" />
+              </a>
+              <a
+                href={info.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group cursor-pointer flex items-center gap-2"
+              >
+                <span className="text-xl font-serif italic text-zinc-400 group-hover:text-jewel-emerald transition-colors">
+                  Instagram
+                </span>
+                <ArrowRight className="w-4 h-4 text-zinc-600 group-hover:text-jewel-emerald group-hover:translate-x-1 transition-all" />
+              </a>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="glass p-10 rounded-3xl relative overflow-hidden"
+        >
+          {formState === "success" ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex flex-col items-center justify-center py-12 text-center"
+            >
+              <CheckCircle2 className="w-16 h-16 text-jewel-emerald mb-6" />
+              <h4 className="text-3xl font-serif italic mb-4">Message Sent</h4>
+              <p className="text-zinc-400 font-sans font-light">
+                Thank you! I'll get back to you shortly.
+              </p>
+              <button
+                onClick={() => setFormState("idle")}
+                className="mt-8 text-jewel-emerald font-sans text-xs uppercase tracking-widest hover:underline"
+              >
+                Send another
+              </button>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-widest text-zinc-500 font-sans">
+                  Name
+                </label>
+                <input
+                  required
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-jewel-emerald/50 transition-colors font-sans text-sm"
+                  placeholder="Your Name"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-widest text-zinc-500 font-sans">
+                  Email
+                </label>
+                <input
+                  required
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-jewel-emerald/50 transition-colors font-sans text-sm"
+                  placeholder="your@email.com"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-widest text-zinc-500 font-sans">
+                  Message
+                </label>
+                <textarea
+                  required
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-jewel-emerald/50 transition-colors font-sans text-sm resize-none"
+                  placeholder="Tell me about your project..."
+                />
+              </div>
+              <button
+                disabled={formState === "submitting"}
+                className="w-full py-4 bg-jewel-emerald text-black rounded-xl font-sans text-xs uppercase tracking-[0.2em] font-bold hover:bg-white transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                {formState === "submitting" ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    Send Message <Send className="w-3 h-3" />
+                  </>
+                )}
+              </button>
+              {formState === "error" && (
+                <p className="text-red-400 text-[10px] text-center font-sans">
+                  Something went wrong. Please try again.
+                </p>
+              )}
+            </form>
+          )}
+        </motion.div>
+      </div>
+
+      <footer className="absolute bottom-12 left-8 md:left-32 right-8 md:right-32 flex justify-between items-center text-[10px] font-sans uppercase tracking-[0.3em] text-zinc-600">
+        <span>© 2026 Kanish Kainth</span>
+        <div className="flex gap-12">
+          <Link to="/privacy" className="hover:text-white transition-colors">
+            Privacy
+          </Link>
+          <Link to="/terms" className="hover:text-white transition-colors">
+            Terms
+          </Link>
+        </div>
+      </footer>
+    </section>
+  );
+}
