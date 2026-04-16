@@ -1,7 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
-import { info } from "../data/info";
 
 export default function Terms() {
   return (
@@ -117,10 +116,10 @@ export default function Terms() {
               <p>
                 For any questions regarding these terms, contact:{" "}
                 <a
-                  href={`mailto:${info.email}`}
+                  href="mailto:knshkainth2002@gmail.com"
                   className="text-jewel-emerald hover:underline"
                 >
-                  {info.email}
+                  knshkainth2002@gmail.com
                 </a>
               </p>
             </section>

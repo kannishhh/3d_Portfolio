@@ -3,25 +3,26 @@ import { info } from "../data/info";
 
 export default function Hero() {
   return (
-    <section className="h-screen flex flex-col justify-center px-8 md:px-32 relative overflow-hidden">
+    <section className="min-h-screen flex flex-col justify-center px-6 md:px-32 relative overflow-hidden py-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
         className="max-w-3xl z-10 mx-auto text-center flex flex-col items-center"
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-jewel-emerald/5 rounded-full pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] border border-jewel-emerald/5 rounded-full pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 border border-jewel-emerald/5 rounded-full pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 md:w-[30rem] md:h-[30rem] border border-jewel-emerald/5 rounded-full pointer-events-none" />
+
         <motion.span
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-jewel-emerald/60 font-sans text-md uppercase tracking-[0.4em] mt-12 block font-medium text-center"
+          className="text-jewel-emerald/60 font-sans text-xs md:text-md uppercase tracking-[0.4em] mt-4 md:mt-12 block font-medium text-center"
         >
           Hello, I'm
         </motion.span>
 
-        <h1 className="text-6xl md:text-[7rem] font-light mb-6 leading-[0.9] tracking-tight overflow-hidden">
+        <h1 className="text-5xl md:text-[7rem] font-light mb-6 leading-[0.9] tracking-tight overflow-hidden">
           <motion.div
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
@@ -39,7 +40,7 @@ export default function Hero() {
           </motion.div>
         </h1>
 
-        <h2 className="text-3xl md:text-5xl font-light mb-4 leading-tight">
+        <h2 className="text-2xl md:text-5xl font-light mb-4 leading-tight">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -49,13 +50,13 @@ export default function Hero() {
           </motion.div>
         </h2>
 
-        <p className="text-zinc-400 text-lg md:text-xl max-w-lg mb-10 font-sans font-light leading-relaxed text-center">
+        <p className="text-zinc-400 text-base md:text-xl max-w-lg mb-10 font-sans font-light leading-relaxed text-center">
           Frontend-focused developer specializing in React.js and AI-powered
           applications. I build fast, scalable, and visually engaging web
           experiences.
         </p>
 
-        <div className="flex items-center justify-center gap-12">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-12">
           <button
             onClick={() =>
               document
@@ -86,7 +87,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-serif text-white/[0.01] select-none pointer-events-none italic">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-serif text-white/[0.02] select-none pointer-events-none italic">
         Portfolio
       </div>
     </section>
