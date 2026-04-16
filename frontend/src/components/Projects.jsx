@@ -138,28 +138,47 @@ export default function Projects() {
                 </div>
 
                 <div className="flex items-center gap-6 md:gap-8">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-zinc-400 hover:text-jewel-emerald transition-colors group/link"
-                  >
-                    <FiGithub className="w-5 h-5" />
-                    <span className="text-[10px] uppercase tracking-widest font-sans">
-                      Github
-                    </span>
-                  </a>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-zinc-400 hover:text-jewel-emerald transition-colors group/link"
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                    <span className="text-[10px] uppercase tracking-widest font-sans">
-                      Live Demo
-                    </span>
-                  </a>
+                  {project.github ? (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-zinc-400 hover:text-jewel-emerald transition-colors group/link"
+                    >
+                      <FiGithub className="w-5 h-5" />
+                      <span className="text-[10px] uppercase tracking-widest font-sans">
+                        Github
+                      </span>
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-2 text-zinc-600 cursor-not-allowed">
+                      <FiGithub className="w-5 h-5 opacity-50" />
+                      <span className="text-[10px] uppercase tracking-widest font-sans opacity-50">
+                        Coming Soon
+                      </span>
+                    </div>
+                  )}
+
+                  {project.live ? (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-zinc-400 hover:text-jewel-emerald transition-colors group/link"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                      <span className="text-[10px] uppercase tracking-widest font-sans">
+                        Live Demo
+                      </span>
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-2 text-zinc-600 cursor-not-allowed">
+                      <ExternalLink className="w-4 h-4 opacity-50" />
+                      <span className="text-[10px] uppercase tracking-widest font-sans opacity-50">
+                        Coming Soon
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
