@@ -5,21 +5,19 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
-    // Optimize for production
-    minify: 'esbuild', // Use esbuild (default, faster than terser)
+    minify: "esbuild",
     rollupOptions: {
       output: {
         manualChunks: {
-          // Separate vendor libraries for better caching
-          vendor: ['react', 'react-dom'],
-          three: ['@react-three/fiber', '@react-three/drei', '@react-three/postprocessing'],
-          gsap: ['gsap', '@gsap/react']
-        }
-      }
+          vendor: ["react", "react-dom"],
+          three: [
+            "@react-three/fiber",
+            "@react-three/drei",
+            "@react-three/postprocessing",
+          ],
+        },
+      },
     },
-    // Increase chunk size warning limit for 3D assets
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
   },
-  // Optimize assets
-  assetsInclude: ['**/*.gltf', '**/*.glb', '**/*.hdr']
 });
