@@ -3,18 +3,24 @@ import { info } from "../data/info";
 
 export default function About() {
   return (
-    <section className="min-h-screen flex items-center px-6 md:px-32 relative py-20">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-center w-full">
+    <section className="md:min-h-screen flex items-center px-6 md:px-32 relative pt-4 pb-20 md:py-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-24 items-center w-full">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-          className="relative h-[40vh] md:h-[60vh] flex items-center justify-center"
+          className="relative h-[30vh] md:h-[60vh] flex items-center justify-center mt-0 md:mt-0"
         >
           <div className="w-full h-full relative flex items-center justify-center">
             <div className="absolute w-48 h-48 md:w-80 md:h-80 border border-jewel-emerald/10 rounded-full animate-[spin_20s_linear_infinite]" />
             <div className="absolute w-40 h-40 md:w-64 md:h-64 border border-jewel-emerald/20 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
             <div className="absolute w-32 h-32 md:w-48 md:h-48 border border-jewel-emerald/30 rounded-full animate-[spin_10s_linear_infinite]" />
+
+            <div className="absolute w-24 h-24 md:w-32 md:h-32 flex items-center justify-center text-center z-20">
+              <span className="text-white/60 font-serif italic text-[10px] md:text-sm leading-tight px-4">
+                "Focused on performance, clarity, and real impact."
+              </span>
+            </div>
 
             <div className="w-24 h-24 md:w-32 md:h-32 bg-jewel-emerald/10 blur-3xl rounded-full animate-pulse" />
 

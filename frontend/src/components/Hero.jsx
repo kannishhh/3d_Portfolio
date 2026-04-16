@@ -3,7 +3,7 @@ import { info } from "../data/info";
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-col justify-center px-6 md:px-32 relative overflow-hidden py-20">
+    <section className="min-h-screen flex flex-col justify-center px-6 md:px-32 relative overflow-hidden pt-20 pb-4 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
