@@ -4,6 +4,8 @@ import { Mail, ArrowRight, Send, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 
+import { info } from "../data/info";
+
 export default function Contact() {
   const [formState, setFormState] = useState("idle");
   const [formData, setFormData] = useState({
@@ -60,30 +62,40 @@ export default function Contact() {
 
           <div className="space-y-6 md:space-y-8">
             <a
-              href="mailto:knshkainth2002@gmail.com"
+              href={`mailto:${info.email}`}
               className="flex items-center gap-4 text-white group w-fit"
             >
               <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-jewel-emerald group-hover:text-black transition-all duration-500">
                 <Mail className="w-4 h-4 md:w-5 md:h-5" />
               </div>
               <span className="font-serif italic text-xl md:text-2xl group-hover:text-jewel-emerald transition-colors">
-                knshkainth2002@gmail.com
+                {info.email}
               </span>
             </a>
 
             <div className="flex gap-6 md:gap-8">
-              <div className="group cursor-pointer flex items-center gap-2">
+              <a
+                href={info.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group cursor-pointer flex items-center gap-2"
+              >
                 <span className="text-lg md:text-xl font-serif italic text-zinc-400 group-hover:text-jewel-emerald transition-colors">
                   LinkedIn
                 </span>
                 <ArrowRight className="w-3 h-3 md:w-4 md:h-4 text-zinc-600 group-hover:text-jewel-emerald group-hover:translate-x-1 transition-all" />
-              </div>
-              <div className="group cursor-pointer flex items-center gap-2">
+              </a>
+              <a
+                href={info.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group cursor-pointer flex items-center gap-2"
+              >
                 <span className="text-lg md:text-xl font-serif italic text-zinc-400 group-hover:text-jewel-emerald transition-colors">
                   Instagram
                 </span>
                 <ArrowRight className="w-3 h-3 md:w-4 md:h-4 text-zinc-600 group-hover:text-jewel-emerald group-hover:translate-x-1 transition-all" />
-              </div>
+              </a>
             </div>
           </div>
         </motion.div>
