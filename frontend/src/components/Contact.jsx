@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Mail, ArrowRight, Send, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import emailjs from "@emailjs/browser";
 
 import { info } from "../data/info";
 
@@ -11,6 +10,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
   });
 
@@ -19,25 +19,30 @@ export default function Contact() {
     setFormState("submitting");
 
     try {
-      const result = await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        {
+      const result = await fetch("https://kanishkainth.vercel.app/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          message: formData.message,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-      );
+          subject: "Portfolio Contact",
 
-      if (result.status === 200) {
+          message: formData.message,
+        }),
+      });
+
+      const data = await Response.json();
+
+      if (data.success) {
         setFormState("success");
         setFormData({ name: "", email: "", message: "" });
       } else {
         setFormState("error");
       }
     } catch (error) {
-      console.error("EmailJS error:", error);
+      console.error("Backend error:", error);
       setFormState("error");
     }
   };
@@ -156,6 +161,20 @@ export default function Contact() {
                   }
                   className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 md:px-4 py-2 md:py-3 focus:outline-none focus:border-jewel-emerald/50 transition-colors font-sans text-xs md:text-sm"
                   placeholder="your@email.com"
+                />
+              </div>
+              <div className="space-y-1 md:space-y-2">
+                <label className="text-[8px] md:text-[10px] uppercase tracking-widest text-zinc-500 font-sans">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  placeholder="Subject"
+                  value={formData.subject}
+                  onChange={(e) =>
+                    setFormData({ ...formData, subject: e.target.value })
+                  }
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 md:px-4 py-2 md:py-3 focus:outline-none focus:border-jewel-emerald/50 transition-colors font-sans text-xs md:text-sm"
                 />
               </div>
               <div className="space-y-1 md:space-y-2">

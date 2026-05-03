@@ -9,7 +9,7 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-resend.api_key = os.environ.get("RESEND_API_KEY")
+resend.api_key = os.getenv("RESEND_API_KEY")
 
 
 @app.route("/contact", methods=["POST"])
@@ -18,6 +18,7 @@ def contact():
 
     name = data.get("name")
     email = data.get("email")
+    subject = data.get("subject")
     message = data.get("message")
 
     if not name or not email or not message:
@@ -27,11 +28,11 @@ def contact():
         resend.Emails.send(
             {
                 "from": "Portfolio <onboarding@resend.dev>",
-                "to": "knshkainth2002@gmail.com",
-                "subject": "New Portfolio Message",
+                "to": ["knshkainth2002@gmail.com"],
+                "subject": subject if subject else f"Message from {name}",
                 "reply_to": email,
                 "html": f"""
-                    <h3>New Message from Portfolio</h3>
+                    <h3>New Portfolio Message</h3>
                     <p><strong>Name:</strong> {name}</p>
                     <p><strong>Email:</strong> {email}</p>
                     <p><strong>Message:</strong><br>{message}</p>
