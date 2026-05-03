@@ -19,24 +19,20 @@ export default function Contact() {
     setFormState("submitting");
 
     try {
-      const result = await fetch(
-        "https://portfolio-tfs3.onrender.com/contact",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            subject: "Portfolio Contact",
-
-            message: formData.message,
-          }),
+      const res = await fetch("https://portfolio-tfs3.onrender.com/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: "Portfolio Contact",
+          message: formData.message,
+        }),
+      });
 
-      const data = await Response.json();
+      const data = await res.json();
 
       if (data.success) {
         setFormState("success");
@@ -44,8 +40,8 @@ export default function Contact() {
       } else {
         setFormState("error");
       }
-    } catch (error) {
-      console.error("Backend error:", error);
+    } catch (err) {
+      console.error(err);
       setFormState("error");
     }
   };
