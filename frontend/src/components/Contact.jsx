@@ -19,19 +19,22 @@ export default function Contact() {
     setFormState("submitting");
 
     try {
-      const result = await fetch("https://kanishkainth.vercel.app/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: "Portfolio Contact",
+      const result = await fetch(
+        "https://portfolio-tfs3.onrender.com/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: "Portfolio Contact",
 
-          message: formData.message,
-        }),
-      });
+            message: formData.message,
+          }),
+        },
+      );
 
       const data = await Response.json();
 
