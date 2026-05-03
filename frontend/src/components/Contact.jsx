@@ -12,10 +12,14 @@ export default function Contact() {
     email: "",
     subject: "",
     message: "",
+    company: "",
   });
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
+    if (formData.company) return;
     e.preventDefault();
+    if (!validateForm()) return;
     setFormState("submitting");
 
     try {
@@ -36,7 +40,8 @@ export default function Contact() {
 
       if (data.success) {
         setFormState("success");
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setErrors({});
       } else {
         setFormState("error");
       }
@@ -44,6 +49,34 @@ export default function Contact() {
       console.error(err);
       setFormState("error");
     }
+  };
+
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+
+    if (!validateEmail(formData.email)) {
+      newErrors.email = "Enter a Valid email";
+    }
+
+    if (formData.subject.length < 3) {
+      newErrors.subject = "Subject too short";
+    }
+
+    if (formData.message.length < 10) {
+      newErrors.message = "Message must be at least 10 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   return (
@@ -132,6 +165,15 @@ export default function Contact() {
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+              <input
+                type="text"
+                name="company"
+                value={formData.company}
+                onChange={(e) =>
+                  setFormData({ ...formData, company: e.target.value })
+                }
+                className="hidden"
+              />
               <div className="space-y-1 md:space-y-2">
                 <label className="text-[8px] md:text-[10px] uppercase tracking-widest text-zinc-500 font-sans">
                   Name
@@ -146,6 +188,9 @@ export default function Contact() {
                   className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 md:px-4 py-2 md:py-3 focus:outline-none focus:border-jewel-emerald/50 transition-colors font-sans text-xs md:text-sm"
                   placeholder="Your Name"
                 />
+                {errors.name && (
+                  <p className="text-red-400 text-[10px]">{errors.name}</p>
+                )}
               </div>
               <div className="space-y-1 md:space-y-2">
                 <label className="text-[8px] md:text-[10px] uppercase tracking-widest text-zinc-500 font-sans">
@@ -161,20 +206,27 @@ export default function Contact() {
                   className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 md:px-4 py-2 md:py-3 focus:outline-none focus:border-jewel-emerald/50 transition-colors font-sans text-xs md:text-sm"
                   placeholder="your@email.com"
                 />
+                {errors.email && (
+                  <p className="text-red-400 text-[10px]">{errors.email}</p>
+                )}
               </div>
               <div className="space-y-1 md:space-y-2">
                 <label className="text-[8px] md:text-[10px] uppercase tracking-widest text-zinc-500 font-sans">
                   Subject
                 </label>
                 <input
+                  required
                   type="text"
-                  placeholder="Subject"
+                  placeholder="Hiring/ Project/ Freelance..."
                   value={formData.subject}
                   onChange={(e) =>
                     setFormData({ ...formData, subject: e.target.value })
                   }
                   className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 md:px-4 py-2 md:py-3 focus:outline-none focus:border-jewel-emerald/50 transition-colors font-sans text-xs md:text-sm"
                 />
+                {errors.subject && (
+                  <p className="text-red-400 text-[10px]">{errors.subject}</p>
+                )}
               </div>
               <div className="space-y-1 md:space-y-2">
                 <label className="text-[8px] md:text-[10px] uppercase tracking-widest text-zinc-500 font-sans">
@@ -190,13 +242,22 @@ export default function Contact() {
                   className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 md:px-4 py-2 md:py-3 focus:outline-none focus:border-jewel-emerald/50 transition-colors font-sans text-xs md:text-sm resize-none"
                   placeholder="Tell me about your project..."
                 />
+                {errors.message && (
+                  <p className="text-red-400 text-[10px]">{errors.message}</p>
+                )}
               </div>
               <button
-                disabled={formState === "submitting"}
+                disabled={
+                  formState === "submitting" ||
+                  !formData.name ||
+                  !formData.email ||
+                  !formData.subject ||
+                  !formData.message
+                }
                 className="w-full py-3 md:py-4 bg-jewel-emerald text-black rounded-xl font-sans text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold hover:bg-white transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {formState === "submitting" ? (
-                  "Sending..."
+                  <span className="animate-pulse">Sending...</span>
                 ) : (
                   <>
                     Send Message <Send className="w-3 h-3" />

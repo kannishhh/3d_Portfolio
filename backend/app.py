@@ -32,10 +32,14 @@ def contact():
                 "subject": subject if subject else f"Message from {name}",
                 "reply_to": email,
                 "html": f"""
-                    <h3>New Portfolio Message</h3>
+                <div style="font-family:Arial; padding:20px;" >
+                    <h2>New Portfolio Message</h2>
+                    <hr />
                     <p><strong>Name:</strong> {name}</p>
                     <p><strong>Email:</strong> {email}</p>
-                    <p><strong>Message:</strong><br>{message}</p>
+                    <p><strong>Subject:</strong> {subject}</p>
+                    <p><strong>Message:</strong></p>
+                    <p>{message}</p>
                 """,
             }
         )
