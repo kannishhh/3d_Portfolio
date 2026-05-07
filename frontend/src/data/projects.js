@@ -26,6 +26,7 @@ export const projects = [
     category: "Full Stack App",
     year: 2026,
     desc: "Full-stack application to manage customer orders, measurements, and tailoring workflow with admin dashboard",
+    credentials: { username: "admin", password: "admin123" },
     tech: ["React", "Flask", "PostgreSQL", "Render"],
     github: "https://github.com/kannishhh/Boutique_Management",
     live: "https://boutique-frontend-u5zy.onrender.com",

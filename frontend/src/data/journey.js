@@ -1,6 +1,6 @@
 export const journey = [
   {
-    year: "2024 — Present",
+    year: "2024 — 2026",
     role: "Master's in Computer Applications (MCA)",
     company: "Chandigarh Group of Colleges, Landran",
     desc: "Currently pursuing MCA while building AI-powered and full-stack web applications using React and Flask.",

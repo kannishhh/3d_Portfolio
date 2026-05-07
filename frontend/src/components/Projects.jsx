@@ -126,6 +126,18 @@ export default function Projects() {
                 <p className="text-zinc-400 font-sans text-xs md:text-sm leading-relaxed mb-6 md:mb-8 max-w-md">
                   {project.desc}
                 </p>
+                {project.credentials && (
+                  <div className="bg-white/5 border border-white/10 rounded-md p-3 mb-6 md:mb-8 max-w-sm backdrop-blur-sm">
+                    <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-2 font-sans flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-jewel-emerald animate-pulse"></span>
+                      Demo Credentials
+                    </p>
+                    <div className="flex flex-col gap-1 text-xs font-mono text-zinc-300">
+                      <div><span className="text-zinc-500 select-none">Username: </span>{project.credentials.username}</div>
+                      <div><span className="text-zinc-500 select-none">Password: </span>{project.credentials.password}</div>
+                    </div>
+                  </div>
+                )}
                 <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-10">
                   {project.tech.map((tech) => (
                     <span
